@@ -11,6 +11,10 @@ node('master'){
 
     env.GIT_REPO_URL = 'https://github.com/vlads83/Yoba.git'
     echo "Detected Git Repo URL: ${env.GIT_REPO_URL} , branch : ${env.BRANCH_NAME} , committer : ${env.GIT_AUTHOR_EMAIL}"
+
+ //set additional variables    
+    env.NODEJS_SRC_PATH = "src/node-docker/"
+ // print variables
     sh ("printenv")
 
 ////// Job stages //////////
