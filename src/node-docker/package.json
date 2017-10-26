@@ -1,0 +1,23 @@
+{
+  "name": "node-docker",
+  "version": "1.0.0",
+  "description": "Leaban NODEJS app",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlads83/Yoba.git"
+  },
+  "keywords": [
+    "yoba"
+  ],
+  "author": "Stas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vlads83/Yoba/issues"
+  },
+  "homepage": "https://github.com/vlads83/Yoba#readme"
+}
