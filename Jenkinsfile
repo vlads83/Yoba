@@ -19,6 +19,40 @@ node('master'){
      git_msg = sh (script: "git log -1 | grep 'DRY_RUN'", returnStatus: true)
      echo "GIT message : ${git_msg}"
 
+
+
+//configure job properties
+          if ("${git_msg}" != '0') {
+		echo "DRY RUN : ${git_msg}"
+            properties([
+              parameters([
+                  //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
+                  //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
+                  //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
+                  //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
+                ]),
+                [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
+                disableConcurrentBuilds(),
+                pipelineTriggers([githubPush()]),
+                ])
+          } //end if
+
+          else if ("${git_msg}" == '0') {
+		 echo "DRY RUN : ${git_msg}"
+            properties([
+              parameters([
+                  //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
+                  //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
+                  //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
+                  //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
+                ]),
+                [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
+                disableConcurrentBuilds(),
+               ])
+          }//end else if
+
+
+
     
 
  //set additional variables    
