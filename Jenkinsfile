@@ -42,7 +42,7 @@ node('master'){
 
       //configure job properties
           if ("${env.GITSCM_POLLING}" == 'enable') {
-		echo "GIT SCM PULLING : ${env.GITSCM_PULLING}"
+		echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -57,7 +57,7 @@ node('master'){
           } //end if
 
           else if ("${env.GITSCM_POLLING}" == 'disable') {
-		 echo "GIT SCM PULLING : ${env.GITSCM_PULLING}"
+		 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -79,9 +79,9 @@ node('master'){
 
 ////// Job stages //////////
 
-	stage ("Git"){
-	 git url: "${env.GIT_REPO_URL}", credentialsId:'87d758d1-7a6c-4343-829c-0ce14ccf6474', branch: "${env.BRANCH_NAME}";	
-	} //end of stage
+//	stage ("Git"){
+//	 git url: "${env.GIT_REPO_URL}", credentialsId:'87d758d1-7a6c-4343-829c-0ce14ccf6474', branch: "${env.BRANCH_NAME}";	
+//	} //end of stage
 	
 	stage ('Build'){
 	 sh ("chmod u+x ci_tools/build.sh")
