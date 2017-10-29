@@ -1,2 +1,2 @@
-env.GITSCM_POLLING = "enable"
-env.NODEJS_SRC_PATH = "src/node-docker/"
+env.GITSCM_POLLING="enable"
+env.NODEJS_SRC_PATH="src/node-docker/"

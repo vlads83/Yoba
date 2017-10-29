@@ -22,11 +22,11 @@ node('master'){
 
     //insert build paramerts into envs_properties
 	if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/) {
-        sh("""sed -ri "s/(GITSCM_POLLING =)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
+        sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
 	
 	if ("${git_msg}" == '0') {
-        sh("""sed -ri "s/(GITSCM_POLLING =)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
+        sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
       
       echo "Cat pipiline_properties , 2nd time"
