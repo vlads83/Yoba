@@ -11,19 +11,31 @@ node('master'){
 
     env.GIT_REPO_URL = 'https://github.com/vlads83/Yoba.git'
     echo "Detected Git Repo URL: ${env.GIT_REPO_URL} , branch : ${env.BRANCH_NAME} , committer : ${env.GIT_AUTHOR_EMAIL}"
-
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'UserExclusion', excludedUsers: '''narezatel''']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8cc10957-0d45-44f5-88e6-c3c2633213b9', url: 'https://github.com/vlads83/Yoba.git']]])
+    git_msg = sh (script: "git log -1 | grep 'DRY_RUN'", returnStatus: true)
+    echo "GIT message : ${git_msg}"
+    envPropertiesPath = "ci_tools/pipeline_properties"
+    //insert build paramerts into envs_properties
+      
+	if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/) {
+        sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
+      } //end if
+	
+	if ("${git_msg}" == '0') {
+        sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
 
-    //git url: "${env.GIT_REPO_URL}", credentialsId:'c8c4793d-47e6-47ba-95a5-d7810ed9d906', branch: "${env.BRANCH_NAME}";
-    ////
-     git_msg = sh (script: "git log -1 | grep 'DRY_RUN'", returnStatus: true)
-     echo "GIT message : ${git_msg}"
+      //inject env properties to environment variables
 
+      stage('parametrs'){
 
+       load 'ci_tools/pipeline_properties'
+       sh("printenv")
 
-//configure job properties
-          if ("${git_msg}" != '0') {
-		echo "DRY RUN : ${git_msg}"
+      } // end of stage
+
+      //configure job properties
+          if ("${env.GITSCM_POLLING}" == 'enable') {
+		echo "GIT SCM PULLING : ${env.GITSCM_PULLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -37,8 +49,8 @@ node('master'){
                 ])
           } //end if
 
-          else if ("${git_msg}" == '0') {
-		 echo "DRY RUN : ${git_msg}"
+          else if ("${env.GITSCM_POLLING}" == 'disable') {
+		 echo "GIT SCM PULLING : ${env.GITSCM_PULLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -53,12 +65,10 @@ node('master'){
 
 
 
-    
-
  //set additional variables    
-    env.NODEJS_SRC_PATH = "src/node-docker/"
+ //   env.NODEJS_SRC_PATH = "src/node-docker/"
  // print variables
-    sh ("printenv")
+ //   sh ("printenv")
 
 ////// Job stages //////////
 
