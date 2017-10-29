@@ -32,16 +32,9 @@ node('master'){
       echo "Cat pipiline_properties , 2nd time"
       sh("cat ci_tools/pipeline_properties")
 
-
-      //inject env properties to environment variables
-
-      stage('Parameters'){
-       load 'ci_tools/pipeline_properties'
-       sh("printenv")
-
-      //configure job properties
+       //configure job properties
           if ("${env.GITSCM_POLLING}" == 'enable') {
-		echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
+                echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -56,7 +49,7 @@ node('master'){
           } //end if
 
           else if ("${env.GITSCM_POLLING}" == 'disable') {
-		 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
+                 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
@@ -69,12 +62,13 @@ node('master'){
                ])
           }//end else if
 
-	} //ens of Properties stage
 
- //set additional variables    
- //   env.NODEJS_SRC_PATH = "src/node-docker/"
- // print variables
- //   sh ("printenv")
+      //inject env properties to environment variables
+
+      stage('Parameters'){
+       load 'ci_tools/pipeline_properties'
+       sh("printenv")
+      } //ens of Properties stage
 
 ////// Job stages //////////
 
