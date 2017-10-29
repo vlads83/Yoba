@@ -23,6 +23,7 @@ node('master'){
 	
 	if ("${git_msg}" == '0') {
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
+      } //end if
 
       //inject env properties to environment variables
 
