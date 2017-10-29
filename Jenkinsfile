@@ -38,7 +38,6 @@ node('master'){
       stage('Parameters'){
        load 'ci_tools/pipeline_properties'
        sh("printenv")
-      } // end of stage
 
       //configure job properties
           if ("${env.GITSCM_POLLING}" == 'enable') {
@@ -70,7 +69,7 @@ node('master'){
                ])
           }//end else if
 
-
+	} //ens of Properties stage
 
  //set additional variables    
  //   env.NODEJS_SRC_PATH = "src/node-docker/"
