@@ -15,8 +15,12 @@ node('master'){
     git_msg = sh (script: "git log -1 | grep 'DRY_RUN'", returnStatus: true)
     echo "GIT message : ${git_msg}"
     envPropertiesPath = "ci_tools/pipeline_properties"
+    echo "Cat pipiline_properties , 1st time" 	
+    sh("cat ci_tools/pipeline_properties")
+
+
+
     //insert build paramerts into envs_properties
-      
 	if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/) {
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
@@ -24,14 +28,16 @@ node('master'){
 	if ("${git_msg}" == '0') {
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
+      
+      echo "Cat pipiline_properties , 2nd time"
+      sh("cat ci_tools/pipeline_properties")
+
 
       //inject env properties to environment variables
 
-      stage('parametrs'){
-
+      stage('Parameters'){
        load 'ci_tools/pipeline_properties'
        sh("printenv")
-
       } // end of stage
 
       //configure job properties
