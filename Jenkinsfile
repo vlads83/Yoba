@@ -76,7 +76,11 @@ catch(err){
     error "Colud not find any Git repository for the job ${JOB_NAME}"
 } //end of catch
 
+} //end of node
 
+node('master'){
+
+try {
 
 ////// Job stages //////////
 
@@ -90,5 +94,11 @@ catch(err){
 	} //end of stage
 	
 ////////////////////////////
+ } //end of try
+
+	catch(err){
+    	throw err
+    	error "Error in job ${JOB_NAME}"
+	} //end of catch
 
 } //end of node 
