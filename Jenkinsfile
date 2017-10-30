@@ -4,8 +4,10 @@ import jenkins.model.Jenkins
 import hudson.model.*
 import groovy.json.*
 
-node('master'){
 
+node('master'){
+	
+try {
  //clean up work space
     step([$class: 'WsCleanup'])
 
@@ -67,13 +69,14 @@ node('master'){
                ])
           }//end else if
 
+}//end of try
 
-      //inject env properties to environment variables
+catch(err){
+    throw err
+    error "Colud not find any Git repository for the job ${JOB_NAME}"
+} //end of catch
 
-//      stage('Parameters'){
-  //     load 'ci_tools/pipeline_properties'
-    //   sh("printenv")
-      //} //ens of Properties stage
+
 
 ////// Job stages //////////
 
