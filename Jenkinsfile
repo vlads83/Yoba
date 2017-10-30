@@ -33,6 +33,10 @@ node('master'){
       echo "Cat pipiline_properties , 2nd time"
       sh("cat ci_tools/pipeline_properties")
 
+      load 'ci_tools/pipeline_properties'
+      sh("printenv")
+
+
        //configure job properties
           if ("${env.GITSCM_POLLING}" == 'enable') {
                 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
@@ -66,10 +70,10 @@ node('master'){
 
       //inject env properties to environment variables
 
-      stage('Parameters'){
-       load 'ci_tools/pipeline_properties'
-       sh("printenv")
-      } //ens of Properties stage
+//      stage('Parameters'){
+  //     load 'ci_tools/pipeline_properties'
+    //   sh("printenv")
+      //} //ens of Properties stage
 
 ////// Job stages //////////
 
