@@ -25,7 +25,7 @@ node('master'){
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
 	
-	if ("${git_msg}" == '1') {
+	if ("${git_msg}" == '0') {
 	echo "Modifying pipiline"
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
