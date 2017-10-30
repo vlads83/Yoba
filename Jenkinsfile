@@ -25,7 +25,7 @@ node('master'){
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
 	
-	if ("${git_msg}" == '0') {
+	if ("${git_msg}" == '1') {
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
       
