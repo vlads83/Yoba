@@ -78,8 +78,6 @@ catch(err){
     error "Colud not find any Git repository for the job ${JOB_NAME}"
 } //end of catch
 
-} //end of node
-
 
 try {
 
@@ -102,3 +100,4 @@ try {
     	error "Error in job ${JOB_NAME}"
 	} //end of catch
 
+} //end of node
