@@ -12,8 +12,8 @@ try {
     step([$class: 'WsCleanup'])
 
     env.GIT_REPO_URL = 'https://github.com/vlads83/Yoba.git'
-	echo "Detected Git Repo URL: ${env.GIT_REPO_URL} , branch : ${env.BRANCH_NAME} , ${env.CHANGE_TITLE} , ${env.CHANGE_AUTHOR} , ${env.CHANGE_AUTHOR_DISPLAY_NAME}"
-   checkout([$class: 'GitSCM', branches: [[name: "*/${env.BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'UserExclusion', excludedUsers: '''narezatel''']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8cc10957-0d45-44f5-88e6-c3c2633213b9', url: 'https://github.com/vlads83/Yoba.git']]])
+    echo "Detected Git Repo URL: ${env.GIT_REPO_URL} , branch : ${env.BRANCH_NAME} , ${env.CHANGE_TITLE} , ${env.CHANGE_AUTHOR} , ${env.CHANGE_AUTHOR_DISPLAY_NAME}"
+    checkout([$class: 'GitSCM', branches: [[name: "*/${env.BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8cc10957-0d45-44f5-88e6-c3c2633213b9', url: 'https://github.com/vlads83/Yoba.git']]])
     git_msg = sh (script: "git log -1 | grep 'DRY_RUN'", returnStatus: true)
     echo "GIT message : ${git_msg}"
     envPropertiesPath = "ci_tools/pipeline_properties"
@@ -57,7 +57,7 @@ try {
 
           // else if (("${env.GITSCM_POLLING}" == 'disable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
 	//	if ("${env.BRANCH_NAME}" == 'hotfix-1')  {
-                 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
+            echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
                   //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
