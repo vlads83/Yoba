@@ -69,7 +69,11 @@ try {
                 disableConcurrentBuilds(),
                ])
         // }//end else if
-
+		def q = Jenkins.instance.queue
+		q.items.each { 
+  		println("${it.task.name}:")
+ 		println("Parameters: ${it.params}")
+}
 }//end of try
 
 
