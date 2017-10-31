@@ -55,7 +55,7 @@ try {
                 ])
           } //end if
 
-          else if (("${env.GITSCM_POLLING}" == 'disable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
+          else if (("${env.GITSCM_POLLING}" == 'dittsable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
                  echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
