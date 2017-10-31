@@ -23,7 +23,7 @@ try {
 
 
     //insert build paramerts into envs_properties
-	if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/) {
+	if ("${env.BRANCH_NAME}" =~ /.*hotfix.*/) {
         sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envPropertiesPath}""")
       } //end if
 	
@@ -55,7 +55,7 @@ try {
                 ])
           } //end if
 
-          else if (("${env.GITSCM_POLLING}" == 'dittsable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
+          else if (("${env.GITSCM_POLLING}" == 'disable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
                  echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
