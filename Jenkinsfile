@@ -40,20 +40,20 @@ try {
 
 
        //configure job properties
-       /*   if ("${env.GITSCM_POLLING}" == 'enable') {
-                echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
-            properties([
-              parameters([
-                  //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
-                  //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
-                  //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
-                  //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
-                ]),
-                [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
-                disableConcurrentBuilds(),
-                pipelineTriggers([githubPush()]),
-                ])
-         */ } //end if
+       //   if ("${env.GITSCM_POLLING}" == 'enable') {
+         //       echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
+         //  properties([
+         //     parameters([
+         //         //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
+         //         //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
+         //         //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
+         //         //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
+         //       ]),
+         //       [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
+         //       disableConcurrentBuilds(),
+         //       pipelineTriggers([githubPush()]),
+         //       ])
+         // } //end if
 
           // else if (("${env.GITSCM_POLLING}" == 'disable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
 		if ("${env.BRANCH_NAME}" == 'hotfix-1')  {
@@ -80,7 +80,6 @@ catch(err){
 
 } //end of node
 
-node('master'){
 
 try {
 
@@ -103,4 +102,3 @@ try {
     	error "Error in job ${JOB_NAME}"
 	} //end of catch
 
-} //end of node 
