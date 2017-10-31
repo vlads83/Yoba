@@ -40,7 +40,7 @@ try {
 
 
        //configure job properties
-       //*   if ("${env.GITSCM_POLLING}" == 'enable') {
+       /*   if ("${env.GITSCM_POLLING}" == 'enable') {
                 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
             properties([
               parameters([
@@ -53,7 +53,7 @@ try {
                 disableConcurrentBuilds(),
                 pipelineTriggers([githubPush()]),
                 ])
-         *// } //end if
+         */ } //end if
 
           // else if (("${env.GITSCM_POLLING}" == 'disable') || ( "${env.BRANCH_NAME}" == 'hotfix-1'))  {
 		if ("${env.BRANCH_NAME}" == 'hotfix-1')  {
