@@ -56,7 +56,10 @@ stage ('Parameters') {
 	  
 
   } //end of try
-catch {}	
+	
+catch(error){
+     currentBuild.result = 'FALURE'
+}	
 finaly {}
 } //end of node
 	
