@@ -49,11 +49,14 @@ stage ('Parameters') {
               [$class: 'jenkins.model.BuildDiscarderProperty', 
 	            strategy: [$class: 'LogRotator', numToKeepStr: '50']
 	      ], //end class
-        disableConcurrentBuilds()
+        disableConcurrentBuilds(),
+	pipelineTriggers([githubPush()]),
 	    ]) //end properties
     } //end stage
 	  
 
   } //end of try
+catch {}	
+finaly {}
 } //end of node
 	
