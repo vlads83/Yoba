@@ -24,7 +24,7 @@ node('master'){
 	  doGenerateSubmoduleConfigurations: false,
 	  extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'ci_tools/pipeline_properties']]]],
 	  submoduleCfg: [],
-	  userRemoteConfigs: [[credentialsId: 'c8c4793d-47e6-47ba-95a5-d7810ed9d906',
+	  userRemoteConfigs: [[credentialsId: '8cc10957-0d45-44f5-88e6-c3c2633213b9',
 	  url: "${env.GIT_REPO_URL}"]]])
     
  
