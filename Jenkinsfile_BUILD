@@ -51,7 +51,6 @@ try {
                 ]),
                 [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
                 disableConcurrentBuilds(),
-                pipelineTriggers([githubPush()]),
                 ])
           } //end if
 
