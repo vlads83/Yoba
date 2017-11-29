@@ -26,8 +26,7 @@ node('master'){
 	  submoduleCfg: [],
 	  userRemoteConfigs: [[credentialsId: '8cc10957-0d45-44f5-88e6-c3c2633213b9',
 	  url: "${env.GIT_REPO_URL}"]]])
-    
- 
+  
 ////// detect "ci skip" message /////	
     git_msg = sh (script: "git log -1 | egrep 'ci_skip|CI_SKIP|UT-Israel-DevOps'", returnStatus: true)
     echo "GIT message : ${git_msg}"
@@ -37,7 +36,6 @@ node('master'){
       currentBuild.result = 'ABORTED'
       return    
     }	//end if  
-
 
 ///// set parameters
 stage ('Parameters') {
@@ -53,7 +51,6 @@ stage ('Parameters') {
 	pipelineTriggers([githubPush()]),
 	    ]) //end properties
     } //end stage
-	  
 
 } //end of try
 	
