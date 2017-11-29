@@ -55,7 +55,7 @@ stage ('Parameters') {
     } //end stage
 	  
 
-  } //end of try
+} //end of try
 	
 catch(error){
      currentBuild.result = 'FALURE'
