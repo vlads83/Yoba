@@ -10,6 +10,7 @@ try {
  //clean up work space
     step([$class: 'WsCleanup'])
 	
+BRANCH_NAME='master'
 	
 	checkout([$class: 'GitSCM',
 	  branches: [[name: "*/${env.BRANCH_NAME}"]],
