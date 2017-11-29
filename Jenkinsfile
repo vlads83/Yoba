@@ -60,6 +60,6 @@ stage ('Parameters') {
 catch(error){
      currentBuild.result = 'FALURE'
 }	
-finaly {}
+finally {}
 } //end of node
 	
