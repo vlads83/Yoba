@@ -80,13 +80,7 @@ node('master'){
 
 try {
 
-////// Job stages //////////
-
-//	stage ("Git"){
-//	 git url: "${env.GIT_REPO_URL}", credentialsId:'87d758d1-7a6c-4343-829c-0ce14ccf6474', branch: "${env.BRANCH_NAME}";	
-//	} //end of stage
-	
-	stage ('Build'){
+stage ('Build'){
 	 sh ("chmod u+x ci_tools/build.sh")
 	 sh ("ci_tools/build.sh")
 	} //end of stage
