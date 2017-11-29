@@ -30,7 +30,7 @@ node('master'){
  
 ////// detect "ci skip" message /////	
     git_msg = sh (script: "git log -1 | egrep 'ci_skip|CI_SKIP|UT-Israel-DevOps'", returnStatus: true)
-    echo "GIT message : ${git_msg}
+    echo "GIT message : ${git_msg}"
  
     if ("${git_msg}" == '0') {
       echo "CI_SKIP message or self-commit detected , aborting job" 
