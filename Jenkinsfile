@@ -15,7 +15,7 @@ node('master'){
     def split = "${JOB_NAME}".split('/')
     env.GIT_REPO_NAME = split[1]
     env.GIT_OWNER = split[0]
-    env.GIT_REPO_URL = 'https://github.com/' + "${env.GIT_OWNER}" + '/' + "${env.GIT_REPO_NAME}" + '.git'
+    env.GIT_REPO_URL = 'https://github.com/vlads86/' + "${env.GIT_REPO_NAME}" + '.git'
     echo "Detected Git Repo URL: ${env.GIT_REPO_URL} , branch : ${env.BRANCH_NAME}"
 
     //Checkout GitHub , download pipeline_properties file
