@@ -76,22 +76,19 @@ catch(err){
     error "Colud not find any Git repository for the job ${JOB_NAME}"
 } //end of catch
 
-} //end of node
-
-node('master'){
-
 try {
-
 ////// Job stages //////////
 
 //	stage ("Git"){
 //	 git url: "${env.GIT_REPO_URL}", credentialsId:'87d758d1-7a6c-4343-829c-0ce14ccf6474', branch: "${env.BRANCH_NAME}";	
 //	} //end of stage
 	
-	stage ('Build'){
-	 sh ("chmod u+x ci_tools/build.sh")
-	 sh ("ci_tools/build.sh")
-	} //end of stage
+	stage('Deploy') { // Run Jenkins deploy job,  $DEPLOY_JOB_NAME is defined in pipeline_properties file
+             build job:"${env.DEPLOY_JOB_NAME}",
+           parameters: [
+                  string(name: 'ENVIRONMENT_TYPE', value: "test"),
+           ]
+          } //end of deploy
 	
 ////////////////////////////
  } //end of try
