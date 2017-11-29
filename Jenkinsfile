@@ -84,10 +84,10 @@ try {
 //	} //end of stage
 	
 	stage('Deploy') { // Run Jenkins deploy job,  $DEPLOY_JOB_NAME is defined in pipeline_properties file
-             build job:"${env.DEPLOY_JOB_NAME}",
-           parameters: [
-                  string(name: 'ENVIRONMENT_TYPE', value: "test"),
-           ]
+           //build job:"${env.DEPLOY_JOB_NAME}",
+          // parameters: [
+        //          string(name: 'ENVIRONMENT_TYPE', value: "test"),
+         //  ]
           } //end of deploy
 	
 ////////////////////////////
