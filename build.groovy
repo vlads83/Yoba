@@ -38,12 +38,10 @@ try {
       sh("printenv")
 
 
-       //configure job properties
-          if ("${env.GITSCM_POLLING}" == 'enable') {
-                echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
-            properties([
+   //configure job properties
+     properties([
               parameters([
-                  //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
+                 string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
                   //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
                   //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
                   //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
@@ -51,22 +49,8 @@ try {
                 [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
                 disableConcurrentBuilds(),
                 ])
-          } //end if
-
-          else if ("${env.GITSCM_POLLING}" == 'disable') {
-                 echo "GIT SCM POLLING : ${env.GITSCM_POLLING}"
-            properties([
-              parameters([
-                  //string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
-                  //string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
-                  //choice(choices: ['integration', 'staging', 'production'].join("\n"), description: 'Environment name', name: 'ENVIRONMENT_TYPE'),
-                  //string(name: 'PLATFORM_NAME', defaultValue: "${env.PLATFORM_NAME}", description: 'Platform name'),
-                ]),
-                [$class: 'jenkins.model.BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '50']],
-                disableConcurrentBuilds(),
-               ])
-          }//end else if
-
+       
+         
 }//end of try
 
 catch(err){
