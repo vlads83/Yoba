@@ -1,2 +1,3 @@
+env.ENVIRONMENT_TYPE="integration"
 env.GITSCM_POLLING="enable"
 env.NODEJS_SRC_PATH="src/node-docker/"

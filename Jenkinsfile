@@ -37,11 +37,23 @@ node('master'){
       return
     }	//end if
 
-///// set parameters
-	stage ('Parameters') {
- 	properties([
+		//Modify pipeline_properties file if non-default values are set manually using Jenkins "Build with parameters" option.
+		envsPropertiesPath = "ci_tools/pipeline_properties"
+
+		if ("${params.ENVIRONMENT_TYPE}" != 'null') {
+				sh("""sed -ri "s/(ENVIRONMENT_TYPE=)[^=]*\$/\\1\\"${params.ENVIRONMENT_TYPE}\\"/" ${envsPropertiesPath}""")
+		}
+
+		//replace $ENVIRONMENT_TYPE to "staging" and disable automatic job triggering by Git hook ($GITSCM_POLLING) for hotfix branches
+		if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/) {
+				sh("""sed -ri "s/(ENVIRONMENT_TYPE=)[^=]*\$/\\1\\"staging\\"/" ${envsPropertiesPath}""")
+				sh("""sed -ri "s/(GITSCM_POLLING=)[^=]*\$/\\1\\"disable\\"/" ${envsPropertiesPath}""")
+		}
+
+    ///// set parameters
+		stage ('Parameters') {
+ 		properties([
               parameters([
-                  string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
                   string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
               ]), //end parametrs
               [$class: 'jenkins.model.BuildDiscarderProperty',
@@ -49,8 +61,11 @@ node('master'){
 	      ], //end class
         disableConcurrentBuilds(),
 	      pipelineTriggers([githubPush()]),
-	    ]) //end properties
-   } //end stage
+	    	]) //end properties
+
+				load 'ci_tools/pipeline_properties'
+				sh("printenv")
+ 			} //end stage
 
 
 
@@ -63,7 +78,33 @@ node('master'){
 
 catch(error){
      currentBuild.result = 'FALURE'
+		 resetParameters()
 }//end of catch
 
-finally {}
+finally {
+resetParameters()
+}//end finally
+
 } //end of node
+
+def resetParameters() {
+	if ("${env.BRANCH_NAME}" =~ /.*HOTFIX.*/){
+	 properties([
+              	parameters([
+                	string(name: 'ENVIRONMENT_TYPE', defaultValue: 'integration', description: 'Environment name'),
+			        booleanParam(defaultValue: false, description: 'Override "CI_SKIP" message and run a build', name: 'CI_SKIP_OVERRIDE'),
+               	]),//end parameters
+		            disableConcurrentBuilds()
+      ])//end properties
+	}//end if
+	else {
+	 properties([
+              parameters([
+                	string(name: 'ENVIRONMENT_TYPE', defaultValue: 'integration', description: 'Environment name'),
+			        booleanParam(defaultValue: false, description: 'Override "CI_SKIP" message and run a build', name: 'CI_SKIP_OVERRIDE'),
+               ]),// end parameters
+		            disableConcurrentBuilds(),
+                pipelineTriggers([githubPush()])
+	 ])//end properties
+	}//end else
+}// end of closure
