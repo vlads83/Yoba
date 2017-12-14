@@ -38,8 +38,8 @@ node('master'){
     }	//end if
 
 ///// set parameters
-stage ('Parameters') {
- properties([
+	stage ('Parameters') {
+ 	properties([
               parameters([
                   string(name: 'SERVICE_NAME', defaultValue: "${env.SERVICE_NAME}", description: 'Service name'),
                   string(name: 'ENVIRONMENT_TYPE', defaultValue: "${env.ENVIRONMENT_TYPE}", description: 'Environment name'),
@@ -50,18 +50,20 @@ stage ('Parameters') {
         disableConcurrentBuilds(),
 	      pipelineTriggers([githubPush()]),
 	    ]) //end properties
-    } //end stage
+   } //end stage
+
+
+
+		stage ('Build') {
+			sh ("chmod +x ci_tools/build.sh")
+			sh ("ci_tool/build.sh")
+			} //end Build stage
 
 } //end of try
 
-stage ('Build') {
-sh ("chmod +x ci_tools/build.sh")
-sh ("ci_tool/build.sh")
-} //end Build stage
-
-
 catch(error){
      currentBuild.result = 'FALURE'
-}
+}//end of catch
+
 finally {}
 } //end of node
