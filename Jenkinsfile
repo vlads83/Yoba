@@ -69,11 +69,15 @@ node('master'){
 
 
 
-		stage ('Build') {
-			sh ("chmod +x ci_tools/build.sh")
-			sh ("ci_tools/build.sh")
+			stage ('Build') {
+				sh ("chmod +x ci_tools/build.sh")
+				sh ("ci_tools/build.sh")
 			} //end Build stage
 
+			stage ("Unit_test"){
+				sh ("chmod +x ci_tools/unit_test.sh")
+				sh ("ci_tools/unit_test.sh")
+			}
 } //end of try
 
 catch(error){
