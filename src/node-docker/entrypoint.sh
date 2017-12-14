@@ -1,3 +1,3 @@
 #!/bin/sh
 
-node /src/index.js
+node /src/server.js
