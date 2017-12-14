@@ -71,7 +71,7 @@ node('master'){
 
 		stage ('Build') {
 			sh ("chmod +x ci_tools/build.sh")
-			sh ("ci_tool/build.sh")
+			sh ("ci_tools/build.sh")
 			} //end Build stage
 
 } //end of try
