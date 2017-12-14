@@ -11,5 +11,5 @@ RUN cd /src; npm install
 COPY . /src
 
 EXPOSE  8080
-#CMD ["node", "/src/index.js"]
+RUN ["chmod", "+x", "/src/entrypoint.sh"]
 ENTRYPOINT ["/src/entrypoint.sh"]

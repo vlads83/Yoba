@@ -13,7 +13,6 @@ parent_directory=$(dirname $0)
 	docker_state=$(docker inspect -f {{.State.Running}} $CONTAINER_NAME)
 	echo "Docker state: ${docker_state}"
   cleandocker()
-  echo "xui"
 	#while [ $(docker inspect -f {{.State.Running}} $CONTAINER_NAME) == "true" ] ; do
 	#	docker exec -t $CONTAINER_NAME npm run test
 	#	unitest_status=$?
