@@ -12,4 +12,4 @@ COPY . /src
 
 EXPOSE  8080
 RUN ["chmod", "+x", "/src/entrypoint.sh"]
-ENTRYPOINT ["/src/entrypoint.sh"]
+#ENTRYPOINT ["/src/entrypoint.sh"]
