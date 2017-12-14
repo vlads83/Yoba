@@ -12,7 +12,7 @@ parent_directory=$(dirname $0)
 	docker logs $CONTAINER_NAME
 	docker_state=$(docker inspect -f {{.State.Running}} $CONTAINER_NAME)
 	echo "Docker state: ${docker_state}"
-  cleandocker()
+  cleandocker
 	#while [ $(docker inspect -f {{.State.Running}} $CONTAINER_NAME) == "true" ] ; do
 	#	docker exec -t $CONTAINER_NAME npm run test
 	#	unitest_status=$?
