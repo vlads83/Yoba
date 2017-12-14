@@ -1,5 +1,8 @@
 #!/bin/bash
-
+function cleandocker () {
+	docker kill $CONTAINER_NAME
+	docker rm $CONTAINER_NAME
+}
 parent_directory=$(dirname $0)
 
   CONTAINER_NAME="${SERVICE_NAME}-${BUILD_NUMBER}-test"
@@ -29,8 +32,3 @@ parent_directory=$(dirname $0)
 	#fi
 
 #fi
-
-function cleandocker () {
-	docker kill $CONTAINER_NAME
-	docker rm $CONTAINER_NAME
-}
