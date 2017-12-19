@@ -63,11 +63,10 @@ node('master'){
 	      pipelineTriggers([githubPush()]),
 	    	]) //end properties
         load 'ci_tools/pipeline_properties'
-        VERSION_NUMBER=BUILD_NUMBER
+        env.VERSION_NUMBER="${env.BUILD_NUMBER}"
         sh("printenv")
         echo "VERSION_NUMBER: ${VERSION_NUMBER}"
  			} //end stage
-
 
 
 			stage ('Build') {
