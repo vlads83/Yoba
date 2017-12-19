@@ -62,9 +62,10 @@ node('master'){
         disableConcurrentBuilds(),
 	      pipelineTriggers([githubPush()]),
 	    	]) //end properties
+        load 'ci_tools/pipeline_properties'
         VERSION_NUMBER=BUILD_NUMBER
-				load 'ci_tools/pipeline_properties'
-				sh("printenv")
+        sh("printenv")
+        echo "VERSION_NUMBER: ${VERSION_NUMBER}"
  			} //end stage
 
 
