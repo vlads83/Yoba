@@ -17,13 +17,13 @@ else
 	pushd $parent_directory/..
 
 	eval sudo $(aws ecr get-login --no-include-email --region us-east-2) || exit 3
-	docker tag ${SERVICE_NAME} ${ECR_URL}/${SERVICE_NAME}:latest && \
+	docker tag ${SERVICE_NAME}-${VERSION_NUMBER} ${ECR_URL}/${SERVICE_NAME}:latest && \
 	docker push ${ECR_URL}/${SERVICE_NAME}:latest  && \
 
-	docker tag ${SERVICE_NAME} ${ECR_URL}/${SERVICE_NAME}:${ENVIRONMENT_TYPE}  && \
+	docker tag ${SERVICE_NAME}-${VERSION_NUMBER} ${ECR_URL}/${SERVICE_NAME}:${ENVIRONMENT_TYPE}  && \
 	docker push ${ECR_URL}/${SERVICE_NAME}:${ENVIRONMENT_TYPE}  && \
 
-	docker tag ${SERVICE_NAME} ${ECR_URL}/${SERVICE_NAME}:${VERSION_NUMBER}  && \
+	docker tag ${SERVICE_NAME}-${VERSION_NUMBER} ${ECR_URL}/${SERVICE_NAME}:${VERSION_NUMBER}  && \
 	docker push ${ECR_URL}/${SERVICE_NAME}:${VERSION_NUMBER} || exit 4
 fi
 
