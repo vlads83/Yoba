@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 parent_directory=$(dirname $0)
 
 if [ -z "${SERVICE_NAME}" ] || [ -z "${VERSION_NUMBER}" ] || [ -z "${ENVIRONMENT_TYPE}" ] ; then

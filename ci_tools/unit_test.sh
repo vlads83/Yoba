@@ -5,13 +5,13 @@ function cleandocker () {
 }
 parent_directory=$(dirname $0)
 
-  CONTAINER_NAME="${SERVICE_NAME}-${BUILD_NUMBER}-test"
+  CONTAINER_NAME="${SERVICE_NAME}-${VERSION_NUMBER}-test"
   echo "Container name: ${CONTAINER_NAME}"
-  echo "RUN: docker run -d -e NODE_ENV=development -e ENVIRONMENT_TYPE=$ENVIRONMENT_TYPE -e SERVICE_NAME=$SERVICE_NAME --name $CONTAINER_NAME ${SERVICE_NAME}-${BUILD_NUMBER}"
+  echo "RUN: docker run -d -e NODE_ENV=development -e ENVIRONMENT_TYPE=$ENVIRONMENT_TYPE -e SERVICE_NAME=$SERVICE_NAME --name $CONTAINER_NAME ${SERVICE_NAME}-${VERSION_NUMBER}"
 	docker run -d -e NODE_ENV=development \
                 -e ENVIRONMENT_TYPE=$ENVIRONMENT_TYPE \
                 -e SERVICE_NAME=$SERVICE_NAME \
-                --name $CONTAINER_NAME ${SERVICE_NAME}-${BUILD_NUMBER}
+                --name $CONTAINER_NAME ${SERVICE_NAME}-${VERSION_NUMBER}
 	docker logs $CONTAINER_NAME
 	docker_state=$(docker inspect -f {{.State.Running}} $CONTAINER_NAME)
 	echo "Docker state: ${docker_state}"
