@@ -65,8 +65,7 @@ node('master'){
         load 'ci_tools/pipeline_properties'
         env.VERSION_NUMBER="${env.BUILD_NUMBER}"
         sh("printenv")
-        echo "VERSION_NUMBER: ${VERSION_NUMBER}"
- 			} //end stage
+    } //end stage
 
 
 			stage ('Build') {
@@ -81,7 +80,7 @@ node('master'){
 
       stage ("Artifact"){
 				sh ("chmod +x ci_tools/artifact.sh")
-				sh ("ci_tools/atrifact.sh")
+				sh ("ci_tools/artifact.sh")
 			}
 } //end of try
 
