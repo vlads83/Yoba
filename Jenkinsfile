@@ -62,7 +62,7 @@ node('master'){
         disableConcurrentBuilds(),
 	      pipelineTriggers([githubPush()]),
 	    	]) //end properties
-
+        VERSION_NUMBER="${env.BUILD_NUMBER}"
 				load 'ci_tools/pipeline_properties'
 				sh("printenv")
  			} //end stage
@@ -77,6 +77,11 @@ node('master'){
 			stage ("Unit_test"){
 				sh ("chmod +x ci_tools/unit_test.sh")
 				sh ("ci_tools/unit_test.sh")
+			}
+
+      stage ("Artifact"){
+				sh ("chmod +x ci_tools/artifact.sh")
+				sh ("ci_tools/atrifact.sh")
 			}
 } //end of try
 
