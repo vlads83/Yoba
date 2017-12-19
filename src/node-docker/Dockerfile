@@ -5,7 +5,7 @@ RUN apk add --update nodejs
 
 # Install app dependencies
 COPY package.json /src/package.json
-RUN cd /src; npm install; nmp install express
+RUN cd /src; npm install; npm install express
 
 # Bundle app source
 COPY . /src
