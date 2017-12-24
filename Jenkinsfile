@@ -2,7 +2,6 @@
 import jenkins.model.Jenkins
 import hudson.model.*
 import groovy.json.*
-
 node('master'){
 
   try{    // Get pipeline_properties file from GitHub and set required evvironment variables and job properties.
