@@ -1,7 +1,7 @@
 instance_name: "{{app_name}}-{{platform_name}}-{{region}}"
 
 aws_profile: "aws-sandbox"
-aws_access_key: "AKIAIO6JC5HNQHSEAE5Q"
+aws_access_key: "AKIAIO6JC5HNQHSEAE"
 aws_secret_key: "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"
 aws_region:  "us-east-1"
 aws_iam_instance_profile: "ec2_docker"
