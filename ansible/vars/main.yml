@@ -1,0 +1,26 @@
+instance_name: "{{app_name}}-{{platform_name}}-{{region}}"
+
+aws_profile: "aws-sandbox"
+aws_access_key: "AKIAIO6JC5HNQHSEAE5Q"
+aws_secret_key: "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"
+aws_region:  "us-east-1"
+aws_iam_instance_profile: "ec2_docker"
+aws_ami: "ami-4bf3d731"
+aws_key_name: "Stas"
+aws_instance_type: "t2.micro"
+aws_security_group: "sg-f8e4958f"
+volumes:
+      - {device_name: '/dev/sda1', volume_type: 'gp2', volume_size: '100', delete_on_termination: true ,os_device_name: '/dev/xvda', mount_path: '/'}
+
+ansible_ssh_key: "~/.keys/Stas-sandbox"
+ssh_user: "centos"
+
+server_count: "1"
+
+vpc_id: vpc-7b04c902
+subnets:
+ - {zone: "us-east-1d" ,aws_ec2_subnets: "subnet-d58959f9"}
+
+
+
+base_name: "{{app_name}}-{{platform_name}}-{{region}}"

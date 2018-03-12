@@ -1,0 +1,26 @@
+- include_tasks: preparation.yml
+  tags:
+    - always
+
+- include_tasks: account.yml
+  tags:
+    - always
+
+- include_tasks: ami_lookup.yml
+  tags:
+    - always
+
+- include_tasks: ec2_lookup.yml
+  tags:
+    - provision
+
+- include_tasks: validation.yml
+  with_items: "{{server_list}}"
+  tags:
+    - provision
+  when: server_list | length | int > 0
+
+- include_tasks: ec2_provision.yml
+  tags: 
+    - provision
+  

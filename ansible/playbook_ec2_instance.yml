@@ -1,0 +1,9 @@
+- name: provision
+  hosts: localhost
+  connection: local
+  strategy: debug
+  gather_facts: False
+  vars_files:
+     - vars/main.yml
+  roles:
+     - {role: aws}

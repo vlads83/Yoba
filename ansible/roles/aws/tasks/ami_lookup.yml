@@ -1,0 +1,6 @@
+- name: get ami details from the ami id {{aws_ami}}
+  ec2_ami_find:
+    profile: "{{aws_profile}}"
+    region: "{{aws_region}}"
+    ami_id: "{{aws_ami}}"
+  register: aws_ami_lookup

@@ -1,0 +1,5 @@
+- name: get aws account id using profile {{aws_profile}}
+  shell: aws sts get-caller-identity --output text --query 'Account'
+  #become: yes
+  register: aws_account_id
+  changed_when: False
